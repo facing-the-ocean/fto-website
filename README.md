@@ -1,6 +1,6 @@
 # Facing the Ocean Website
 
-Static HTML/CSS/JS website for [fto.asia](http://fto.asia), deployable to GitHub Pages with no build step.
+This website introduces Facing the Ocean - a network of civic tech communities in Asia.
 
 ## File Structure
 
@@ -26,22 +26,9 @@ fto-website/
 └── README.md               This file
 ```
 
-## Deploying to GitHub Pages
-
-1. Create a new GitHub repository (e.g. `facing-the-ocean/fto-website` or a personal repo)
-2. Push this folder's contents to the repo root (or to a `/docs` folder)
-3. Go to **Settings → Pages** in the repo
-4. Under **Source**, choose `Deploy from a branch` → select `main` branch → `/ (root)` or `/docs`
-5. Save — the site will be live at `https://[org].github.io/[repo]/`
-
-Once live, point your **fto.asia** domain:
-- Go to Settings → Pages → Custom domain → enter `fto.asia`
-- Add a `CNAME` file to the repo root containing just: `fto.asia`
-- Update your DNS: add a CNAME record pointing `fto.asia` → `[org].github.io`
-
 ## Editing Content
 
-All pages are plain HTML — edit them directly and push to GitHub to update the site.
+All pages are plain HTML — edit them directly and push to GitHub to update the site. Ask Eunsoo to add your profile to the repostitory.
 
 - **Navigation** is duplicated in each page (search for `<nav class="site-nav">` to update all)
 - **Footer** is duplicated in each page (search for `<footer class="site-footer">`)
@@ -51,7 +38,7 @@ All pages are plain HTML — edit them directly and push to GitHub to update the
 ## Adding a New Event Page
 
 1. Copy an existing event page (e.g. `events/jeju-2023.html`)
-2. Rename it (e.g. `events/busan-2027.html`)
+2. Rename it (e.g. `events/tokyo-2027.html`)
 3. Update the title, hero content, info chips, schedule, and resources
 4. Add a new entry to `events.html` timeline
 5. Update the homepage (`index.html`) upcoming event banner if applicable
