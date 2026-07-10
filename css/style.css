@@ -943,3 +943,6 @@ a:hover { color: var(--ink-950); }
   .timeline-row { grid-template-columns: 70px 1fr; }
   .tl-body      { padding-left: var(--space-5); }
 }
+
+/* "g0v" wordmark: the serif zero looks like a letter "o", so render it in the sans font */
+.g0v { font-family: var(--font-sans); font-size: 0.95em; }
