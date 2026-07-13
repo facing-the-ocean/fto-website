@@ -66,4 +66,3 @@ Place images in an `img/` folder in the repo root.
 All content is sourced from the FtO HackMD documentation hub:
 - Master index: https://g0v.hackmd.io/@fto/book
 - GitHub org: https://github.com/facing-the-ocean
-- Google Drive archive: https://drive.google.com/open?id=1Qyg6QHq5L8pCykPj6MKIpbGmevuODKHM
