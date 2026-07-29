@@ -946,3 +946,26 @@ a:hover { color: var(--ink-950); }
 
 /* "g0v" wordmark: the serif zero looks like a letter "o", so render it in the sans font */
 .g0v { font-family: var(--font-sans); font-size: 0.95em; }
+
+/* Two-column section intro (narrow text column + wide content) — stacks on smaller screens */
+.section-split {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+.section-split.v-center { align-items: center; }
+@media (max-width: 900px) {
+  .section-split { grid-template-columns: 1fr; gap: var(--space-8); }
+}
+
+/* About page: prose + sidebar — stacks on smaller screens */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-16);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .about-layout { grid-template-columns: 1fr; gap: var(--space-10); }
+}
