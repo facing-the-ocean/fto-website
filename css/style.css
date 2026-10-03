@@ -981,12 +981,6 @@ a:hover { color: var(--ink-950); }
 }
 .schedule-entry .s-ko { color: var(--ink-400); }
 .schedule-entry .s-loc a { color: var(--ink-400); }
-.schedule-note {
-  font-size: 0.78rem;
-  color: var(--ink-400);
-  padding: var(--space-3) 0;
-  border-bottom: 1px solid var(--warm-200);
-}
 @media (max-width: 640px) {
   .schedule-entry { flex-direction: column; gap: var(--space-1); }
   .schedule-entry .s-loc { margin-left: 0; text-align: left; }
@@ -1037,7 +1031,8 @@ a:hover { color: var(--ink-950); }
 .photo-strip::-webkit-scrollbar-track { background: transparent; }
 .photo-strip figure { flex: 0 0 auto; scroll-snap-align: start; }
 .photo-strip img {
-  height: 340px;
+  /* Sized so the next photo always peeks in, signalling that the strip scrolls */
+  height: 300px;
   width: auto;
   display: block;
   border-radius: var(--radius);
@@ -1045,7 +1040,17 @@ a:hover { color: var(--ink-950); }
 }
 .photo-strip:focus-visible { outline: 2px solid var(--teal-400); outline-offset: 4px; }
 @media (max-width: 640px) {
-  .photo-strip img { height: 220px; }
+  /* Section and container padding stack to 48px a side, leaving too little room
+     for a photo plus a peek. Bleed the strip to the screen edge instead, keeping
+     the first photo lined up with the heading. */
+  .photo-strip {
+    margin-left: calc(-1 * var(--space-12));
+    margin-right: calc(-1 * var(--space-12));
+    padding-left: var(--space-12);
+    padding-right: var(--space-12);
+    scroll-padding-left: var(--space-12);
+  }
+  .photo-strip img { height: 200px; }
   .gallery-nav { display: none; }
 }
 

@@ -62,10 +62,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const btns  = gallery.querySelectorAll('.gallery-btn');
     if (!strip || !btns.length) return;
 
+    // Photos vary in width, so step to real photo boundaries rather than by a
+    // fixed pixel amount — that keeps the strip aligned after every click.
+    const offsetOf = fig =>
+      fig.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+
+    const page = dir => {
+      const figs = [...strip.querySelectorAll('figure')];
+      const view = strip.clientWidth;
+      const left = strip.scrollLeft;
+      let target;
+
+      if (dir > 0) {
+        // first photo not yet fully visible on the right
+        const next = figs.find(f => offsetOf(f) + f.offsetWidth > left + view + 1);
+        target = next ? offsetOf(next) : strip.scrollWidth;
+      } else {
+        // last photo starting before the current view, then back up a full page
+        const prevFig = figs.filter(f => offsetOf(f) < left - 1).pop();
+        if (!prevFig) {
+          target = 0;
+        } else {
+          const end = offsetOf(prevFig) + prevFig.offsetWidth;
+          const start = figs.find(f => end - offsetOf(f) <= view);
+          target = start ? offsetOf(start) : 0;
+        }
+      }
+      strip.scrollTo({ left: target, behavior: 'smooth' });
+    };
+
     btns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        strip.scrollBy({ left: Number(btn.dataset.dir) * strip.clientWidth * 0.8, behavior: 'smooth' });
-      });
+      btn.addEventListener('click', () => page(Number(btn.dataset.dir)));
     });
 
     const sync = () => {
