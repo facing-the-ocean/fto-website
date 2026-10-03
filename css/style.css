@@ -944,8 +944,9 @@ a:hover { color: var(--ink-950); }
   .tl-body      { padding-left: var(--space-5); }
 }
 
-/* "g0v" wordmark: the serif zero looks like a letter "o", so render it in the sans font */
-.g0v { font-family: var(--font-sans); font-size: 0.95em; }
+/* Wordmarks spelled with a digit zero ("g0v", "Rep0rter"): the serif zero reads
+   as the letter "o", so render them in the sans font. */
+.g0v, .zero-mark { font-family: var(--font-sans); font-size: 0.95em; }
 
 /* Two-column section intro (narrow text column + wide content) — stacks on smaller screens */
 .section-split {
@@ -968,4 +969,116 @@ a:hover { color: var(--ink-950); }
 }
 @media (max-width: 900px) {
   .about-layout { grid-template-columns: 1fr; gap: var(--space-10); }
+}
+
+/* ── Schedule: location column, bilingual labels, notes ── */
+.schedule-entry .s-loc {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--ink-400);
+  font-size: 0.8rem;
+  text-align: right;
+}
+.schedule-entry .s-ko { color: var(--ink-400); }
+.schedule-entry .s-loc a { color: var(--ink-400); }
+.schedule-note {
+  font-size: 0.78rem;
+  color: var(--ink-400);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--warm-200);
+}
+@media (max-width: 640px) {
+  .schedule-entry { flex-direction: column; gap: var(--space-1); }
+  .schedule-entry .s-loc { margin-left: 0; text-align: left; }
+}
+
+/* ── Photo gallery: horizontal film strip ── */
+.gallery-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+.gallery-nav { display: flex; gap: var(--space-2); flex-shrink: 0; }
+.gallery-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--warm-300);
+  background: var(--warm-50);
+  color: var(--ink-700);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, opacity 0.15s;
+}
+.gallery-btn:hover:not(:disabled) {
+  background: var(--ink-900);
+  color: var(--warm-50);
+  border-color: var(--ink-900);
+}
+.gallery-btn:disabled { opacity: 0.3; cursor: default; }
+.photo-strip {
+  display: flex;
+  gap: var(--space-3);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  overflow-anchor: none;
+  padding-bottom: var(--space-3);
+  scrollbar-width: thin;
+  scrollbar-color: var(--warm-300) transparent;
+}
+.photo-strip::-webkit-scrollbar { height: 6px; }
+.photo-strip::-webkit-scrollbar-thumb { background: var(--warm-300); border-radius: 999px; }
+.photo-strip::-webkit-scrollbar-track { background: transparent; }
+.photo-strip figure { flex: 0 0 auto; scroll-snap-align: start; }
+.photo-strip img {
+  height: 340px;
+  width: auto;
+  display: block;
+  border-radius: var(--radius);
+  background: var(--warm-200);
+}
+.photo-strip:focus-visible { outline: 2px solid var(--teal-400); outline-offset: 4px; }
+@media (max-width: 640px) {
+  .photo-strip img { height: 220px; }
+  .gallery-nav { display: none; }
+}
+
+/* ── Project list ── */
+.project-grid {
+  display: grid;
+  /* min() keeps the track from forcing 290px on screens narrower than that */
+  grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
+  gap: var(--space-4);
+}
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--warm-50);
+  border: 1px solid var(--warm-300);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+}
+.project-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-900);
+  line-height: 1.45;
+}
+.p-by { font-size: 0.8rem; color: var(--ink-500); }
+.p-by strong { color: var(--ink-700); font-weight: 500; }
+.p-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+.p-tag {
+  font-size: 0.7rem;
+  color: var(--teal-600);
+  background: var(--teal-100);
+  border-radius: 999px;
+  padding: 4px 10px;
 }

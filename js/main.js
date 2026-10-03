@@ -55,4 +55,31 @@ document.addEventListener('DOMContentLoaded', () => {
       a.classList.add('active');
     }
   });
+
+  // ── Photo gallery arrows ──
+  document.querySelectorAll('.gallery').forEach(gallery => {
+    const strip = gallery.querySelector('.photo-strip');
+    const btns  = gallery.querySelectorAll('.gallery-btn');
+    if (!strip || !btns.length) return;
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        strip.scrollBy({ left: Number(btn.dataset.dir) * strip.clientWidth * 0.8, behavior: 'smooth' });
+      });
+    });
+
+    const sync = () => {
+      const max = strip.scrollWidth - strip.clientWidth;
+      btns.forEach(btn => {
+        btn.disabled = Number(btn.dataset.dir) < 0
+          ? strip.scrollLeft <= 8
+          : strip.scrollLeft >= max - 8;
+      });
+    };
+    strip.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    // Widths settle as images decode; re-check once everything has loaded.
+    window.addEventListener('load', sync);
+    sync();
+  });
 });
